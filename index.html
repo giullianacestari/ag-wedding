@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosso Casamento - Giulliana & Anthony</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="envelope.css">
+  <link rel="icon" type="image/png" href="/img/logo-pequeno.png">
+</head>
+
+<body class="text-gray-800 antialiased">
+
+  <!-- ===== Modal Envelope: selo cai reto com bounce; depois o flap abre ===== -->
+  <div id="envelope-modal" class="envelope-modal" role="dialog" aria-modal="true" aria-label="Convite de casamento">
+    <div class="envelope-wrap">
+      <div class="envelope">
+        <!-- Retângulo de trás (papel) -->
+        <div class="back" aria-hidden="true"></div>
+
+        <!-- Triângulo inferior (frente) — ponta no centro, sombra interna de baixo pra cima -->
+        <div class="front" aria-hidden="true"></div>
+
+        <!-- Flap triangular (abre) — ponta no centro -->
+        <div class="flap" aria-hidden="true">
+          <svg class="flap-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="paperGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#f5f5f5" />
+              </linearGradient>
+              <radialGradient id="edgeShade" cx="50%" cy="10%" r="90%">
+                <stop offset="65%" stop-color="rgba(0,0,0,0)" />
+                <stop offset="100%" stop-color="rgba(0,0,0,.08)" /> <!-- antes .14 -->
+              </radialGradient>
+              <!-- sombra do flap para baixo -->
+              <filter id="flapShadow" x="-20%" y="-20%" width="140%" height="160%">
+                <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="rgba(0,0,0,.22)" />
+              </filter>
+            </defs>
+            <!-- Triângulo com ponta no meio (y=50) -->
+            <polygon points="0,0 50,50 100,0" fill="url(#paperGrad)" filter="url(#flapShadow)"></polygon>
+            <polygon points="0,0 50,50 100,0" fill="url(#edgeShade)"></polygon>
+          </svg>
+        </div>
+
+        <!-- Novo triângulo cinza (fundo do envelope) -->
+        <div class="inside" aria-hidden="true"></div>
+
+
+        <!-- Selo com imagem (inicialmente centralizado no encontro das pontas) -->
+        <button class="seal" id="envelope-seal" aria-label="Abrir envelope">
+          <img class="seal-img" src="img/Menu.svg" alt="Selo do convite" />
+
+        </button>
+        <span class="seal-text">Clique no selo para abrir</span>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="backdrop-blur-md border-b border-transparent" id="navbarInner">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#versiculo"><img src="/img/logo-pequeno.png" class="h-12 w-auto"></a>
+        <button id="menuBtn" aria-label="Abrir menu"
+          class="md:hidden p-2 rounded hover:bg-white/10 text-[var(--verde-claro)]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <nav class="hidden md:flex gap-8 font-semibold">
+          <a href="#o-casal" class="text-[var(--verde-claro)] hover:text-[var(--bege)]">O casal</a>
+          <a href="#cerimonia" class="text-[var(--verde-claro)] hover:text-[var(--bege)]">O evento</a>
+          <a href="#presentes" class="text-[var(--verde-claro)] hover:text-[var(--bege)]">Lista de
+            presentes</a>
+          <a href="#rsvp" class="text-[var(--verde-claro)] hover:text-[var(--bege)]">Confirmar
+            presença</a>
+        </nav>
+      </div>
+      <!-- mobile -->
+      <div id="mobileMenu" class="md:hidden hidden border-t">
+        <nav class="px-6 py-3 grid gap-3 font-semibold">
+          <a href="#o-casal" class="py-2 text-[var(--verde-claro)]">O casal</a>
+          <a href="#cerimonia" class="py-2 text-[var(--verde-claro)]">O
+            evento</a>
+          <a href="#presentes" class="py-2 text-[var(--verde-claro)]">Lista de
+            presentes</a>
+          <a href="#rsvp" class="py-2 text-[var(--verde-claro)]">Confirmar
+            presença</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Versículo -->
+  <section id="versiculo" class="pt-28 pb-12 bg-[var(--bege)]">
+    <div class="container mx-auto px-6 text-center">
+      <blockquote class="max-w-3xl mx-auto">
+        <p class="text-lg md:text-xl italic text-[var(--cor-texto-cinza)] leading-relaxed font-serif">
+          "Àquele que é capaz de fazer infinitamente mais do que tudo o que pedimos ou pensamos, de acordo com o seu
+          poder que atua em nós."
+        </p>
+        <footer class="mt-4 text-sm md:text-base text-gray-600">
+          - Efésios 3:20
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Nome dos noivos + Foto -->
+  <header
+    class="relative h-screen flex items-center justify-center text-center text-[var(--verde-escuro)] bg-[var(--bege)]">
+    <div class="absolute inset-0 bg-white opacity-40 z-10"></div>
+    <img src="/img/cerimonia-fundo.png"
+      class="absolute inset-0 w-full h-full object-cover object-[center_-20px-20px] object-top opacity-40" />
+    <div class="relative z-20 p-4 animate-fade-in">
+      <!-- <h3 class="text-xl md:text-2xl font-light tracking-widest uppercase">Vamos nos casar</h3> -->
+      <img src="/img/logo verde escuro.png" alt="Brasão dos noivos"
+        class="block mx-auto w-40 md:w-44 lg:w-44 aspect-square" />
+      <h1 class="text-6xl md:text-6xl lg:text-6xl font-bold my-4 font-cursiva">Giulliana & Anthony</h1>
+      <p class="text-xl md:text-2xl font-light tracking-wider">11 de abril de 2026</p>
+    </div>
+  </header>
+
+  <!-- Seções: Contagem / Casal / Evento / Presentes / Presença -->
+  <main>
+    <!-- Contagem regressiva -->
+    <section id="countdown" class="py-20 bg-[var(--verde-claro)] text-[var(--branco)]">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-serif">Faltam</h2>
+
+        <div class="inline-grid grid-cols-2 gap-4 justify-center md:flex md:justify-center md:gap-8">
+
+          <!-- Dias -->
+          <div
+            class="flex flex-col items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-xl bg-white shadow-lg text-[var(--verde-claro)] md:bg-transparent md:shadow-none md:text-[var(--branco)]">
+            <span id="dd" class="text-3xl md:text-5xl font-bold font-serif">00</span>
+            <p class="text-sm md:text-lg mt-1">Dias</p>
+          </div>
+
+          <!-- Horas -->
+          <div
+            class="flex flex-col items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-xl bg-white shadow-lg text-[var(--verde-claro)] md:bg-transparent md:shadow-none md:text-[var(--branco)]">
+            <span id="hh" class="text-3xl md:text-5xl font-bold font-serif">00</span>
+            <p class="text-sm md:text-lg mt-1">Horas</p>
+          </div>
+
+          <!-- Minutos -->
+          <div
+            class="flex flex-col items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-xl bg-white shadow-lg text-[var(--verde-claro)] md:bg-transparent md:shadow-none md:text-[var(--branco)]">
+            <span id="mm" class="text-3xl md:text-5xl font-bold font-serif">00</span>
+            <p class="text-sm md:text-lg mt-1">Minutos</p>
+          </div>
+
+          <!-- Segundos -->
+          <div
+            class="flex flex-col items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-xl bg-white shadow-lg text-[var(--verde-claro)] md:bg-transparent md:shadow-none md:text-[var(--branco)]">
+            <span id="ss" class="text-3xl md:text-5xl font-bold font-serif">00</span>
+            <p class="text-sm md:text-lg mt-1">Segundos</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <!-- O Casal -->
+    <section id="o-casal" class="py-20 bg-white">
+      <div class="container mx-auto px-6 text-center max-w-3xl">
+        <div class="flex justify-center mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--verde-medio)]" viewBox="0 0 20 20"
+            fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M3.172 5.172a4 4 0 016.657 0L10 5.343l.171-.171a4 4 0 116.657 5.657L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-serif">O Casal</h2>
+        <p class="text-lg text-[var(--cor-texto-cinza)] leading-relaxed">
+          Nossa história começou na escola de música, onde a melodia da amizade logo se transformou em uma canção de
+          amor. De amigos, passamos a namorados, parceiros de escola, trabalho e também da vida, compartilhando sonhos e
+          desafios. <br><br>
+
+          Nosso relacionamento ganhou ainda mais sentido quando decidimos seguir juntos no mesmo propósito: levar o amor
+          de Cristo a todas as pessoas. <br><br>
+
+          Hoje, com muita fé, cumplicidade e gratidão, nos preparamos para selar eternamente os 7 anos de uma união
+          linda e
+          abençoada, cercados pelas pessoas que mais amamos. Mal podemos esperar para viver esse dia ao lado de vocês!
+        </p>
+      </div>
+    </section>
+
+    <!-- Cerimônia -->
+    <section id="cerimonia" class="py-20 bg-[var(--verde-claro)]">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-12 font-serif">Cerimônia e Recepção</h2>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 text-left">
+          <div class="bg-white p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <h3 class="text-3xl font-bold text-[var(--verde-medio)] mb-4 font-serif">Detalhes do Evento</h3>
+            <div class="space-y-3 text-[var(--cor-texto-cinza)]">
+              <p><strong>Data:</strong> Sábado, 11 de Abril de 2026</p>
+              <p><strong>Horário:</strong> 14h30</p>
+              <p><strong>Local:</strong> Chácara Recanto Ouro Verde</p>
+              <p><strong>Endereço:</strong> Estrada do Caracu, 1495 - Rio Grande da Serra, SP</p>
+              <a href="https://maps.app.goo.gl/3tmyP9FBK7PWAAHF9" target="_blank" rel="noopener"
+                class="inline-block mt-4 text-[var(--verde-medio)] font-bold hover:underline">Ver no mapa &rarr;</a>
+            </div>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <h3 class="text-3xl font-bold text-[var(--verde-medio)] mb-4 font-serif">Dicas e Informações</h3>
+            <div class="space-y-4 text-[var(--cor-texto-cinza)]">
+              <p><strong>Traje:</strong> Social. <br> Queremos ver todos elegantes para celebrar conosco neste dia
+                especial!
+              </p>
+              <p><strong>Pontualidade:</strong> A cerimônia começará pontualmente às 15h. Chegue com antecedência para
+                se acomodar com tranquilidade e não perder nenhum momento emocionante.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista de Presentes -->
+    <section id="presentes" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+          <div class="md:w-1/3 w-full flex-shrink-0 hidden md:block">
+            <img src="/img/casa-nova.jpeg"
+              class="rounded-lg shadow-xl w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300 " />
+          </div>
+          <div class="md:w-2/3 w-full text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif mb-4">Lista de Presentes</h2>
+            <p class="text-lg text-[var(--cor-texto-cinza)] leading-relaxed mb-6">
+              Se você quiser nos presentear, ficaremos muito felizes! Sua presença já é o nosso maior presente, mas
+              criamos uma lista com carinho para quem quiser contribuir com esse momento.
+            </p>
+            <a href="https://noivos.casar.com/giulliana-e-anthony#presentes" target="_blank"
+              class="bg-[var(--verde-medio)] text-white font-bold py-3 px-8 rounded-lg inline-block hover:opacity-90 transition duration-300 shadow-lg transform hover:-translate-y-0.5 hover:text-[var(--verde-escuro)] hover:bg-[var(--verde-claro)]">Ver
+              Lista de Presentes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" class="py-20 bg-[var(--verde-claro)]">
+      <div class="container mx-auto px-6 text-center max-w-3xl">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-serif">Confirme sua Presença</h2>
+        <p class="text-lg text-[var(--verde-escuro)] leading-relaxed mb-6">
+          Sua presença é muito importante para nós! A confirmação nos ajuda na organização dos lugares e no carinho com
+          cada convidado. Por favor, confirme até o dia 20 de novembro de 2024.
+        </p>
+        <p class="text-md text-[var(--verde-escuro)] bg-white/50 p-4 rounded-lg shadow-sm leading-relaxed mb-8">
+          Para sua comodidade, nossa equipe de assessoria entrará em contato com todos os convidados durante o mês do
+          casamento para uma confirmação final.
+        </p>
+        <a href="https://noivos.casar.com/giulliana-e-anthony#/rsvp" target="_blank" rel="noopener noreferrer"
+          class="bg-[var(--verde-medio)] text-[var(--bege)] font-bold py-3 px-8 rounded-lg inline-block hover:opacity-90 hover:text-[var(--verde-medio)] transition duration-300 shadow-lg transform hover:bg-white hover:-translate-y-0.5">Confirmar
+          Presença</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-16 bg-[var(--verde-escuro)] text-white">
+    <div class="container mx-auto px-6 text-center">
+      <p class="text-2xl font-serif mb-2">Com todo nosso amor,</p>
+      <h3 class="text-4xl md:text-3xl font-serif font-bold text-[var(--verde-claro)]">Giulliana & Anthony</h3>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script src="envelope.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+/* Fonts */
+:root {
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Lato', system-ui, -apple-system;
+  --font-cursiva: "Gwendolyn", cursive;
+  --branco: white;
+  --bege: #fdf8f0;
+  --verde-claro: #98ab8f;
+  --verde-medio: #5d6957;
+  --verde-escuro: #2c3423;
+  --cinza: gray;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-cursiva {
+  font-family: var(--font-cursiva);
+  font-weight: 900;
+}
+
+/* Animação de desvanecimento */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 800ms ease-out both;
+}
+
+/* Efeito de desvanecimento da navbar */
+.nav-scrolled {
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.08);
+  border-color: rgb(0 0 0 / 0.06) !important;
+}

@@ -1,0 +1,241 @@
+:root {
+    --paper-top: #ffffff;
+    --paper-bottom: #f5f5f5;
+    --paper-border: 1px;
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, .18), 0 6px 18px rgba(0, 0, 0, .12);
+    --open-ms: 1500ms;
+    --fade-ms: 200ms;
+    --front-shadow-color: rgba(0, 0, 0, .18);
+    --front-shadow-offset: clamp(6px, 1.1vw, 14px);
+    --front-shadow-blur: clamp(10px, 1.8vw, 26px);
+}
+
+/* Overlay */
+.envelope-modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(1200px 800px at 50% -20%, rgba(0, 0, 0, .06), transparent 60%),
+        linear-gradient(180deg, #f7f7f7, #f1f1f1);
+    z-index: 9999;
+    transition: opacity .6s ease, visibility .6s ease;
+}
+
+.envelope-modal.is-dismissed {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Área do envelope */
+.envelope-wrap {
+    width: min(92vw, 720px);
+    aspect-ratio: 3/2;
+    padding: clamp(8px, 2vw, 16px);
+    display: grid;
+    place-items: center;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1800px;
+    filter: drop-shadow(var(--shadow-lg));
+}
+
+/* Camadas */
+.back {
+    z-index: 1;
+}
+
+.front {
+    z-index: 2;
+}
+
+.flap {
+    z-index: 3;
+}
+
+.seal {
+    z-index: 4;
+}
+
+/* Retângulo (papel) */
+.back {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(120% 120% at 50% 0%, rgba(0, 0, 0, .06) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--paper-top), var(--paper-bottom));
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, .10),
+        inset 0 -8px 18px rgba(0, 0, 0, .08),
+        inset 0 8px 14px rgba(255, 255, 255, .35);
+}
+
+/* Triângulo inferior por cima do retângulo */
+.front {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    background: linear-gradient(to bottom, var(--paper-top), var(--paper-bottom));
+    box-shadow:
+        inset 0 8px 12px rgba(0, 0, 0, .14),
+        /* antes .18 → mais suave */
+        inset 0 -2px 3px rgba(255, 255, 255, .35);
+    z-index: 2;
+}
+
+/* Sombra “projetada” do triângulo inferior, desenhada no papel de trás */
+.back {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(120% 120% at 50% 0%, rgba(0, 0, 0, .06) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--paper-top), var(--paper-bottom));
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, .10),
+        inset 0 -8px 18px rgba(0, 0, 0, .08),
+        inset 0 8px 14px rgba(255, 255, 255, .35);
+}
+
+.back::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: .45;
+    /* antes .55 → mais leve */
+
+    background:
+        radial-gradient(160% 120% at 0% 100%,
+            rgba(0, 0, 0, .06) 0 26%,
+            /* mais clara e transição mais suave */
+            rgba(0, 0, 0, 0) 74%),
+        /* mais afastado */
+        radial-gradient(160% 120% at 100% 100%,
+            rgba(0, 0, 0, .06) 0 26%,
+            rgba(0, 0, 0, 0) 74%);
+
+    filter: blur(4px);
+    /* mais difusa */
+}
+
+
+
+/* opcional: linha inferior mais nítida (se quiser reforçar) */
+.back::after {
+    content: "";
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 1px;
+    background: rgba(0, 0, 0, .10);
+    opacity: .8;
+}
+
+/* Flap (abre) – ponta no centro */
+.flap {
+    position: absolute;
+    inset: 0;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform var(--open-ms) cubic-bezier(.2, .7, .15, 1);
+    will-change: transform;
+}
+
+.flap-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.inside {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    /* abaixo do flap, acima do back */
+    background:
+        radial-gradient(160% 140% at 50% 100%,
+            rgba(0, 0, 0, 0.15) 0%,
+            /* mais escuro na ponta interna */
+            rgba(0, 0, 0, 0.05) 40%,
+            /* transição */
+            rgba(0, 0, 0, 0) 80%),
+        /* desaparece nas bordas */
+        #e5e5e5;
+    /* cor de base */
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Quando abrir */
+.envelope-modal.opening .inside {
+    opacity: 1;
+}
+
+
+
+/* Selo centralizado no encontro das pontas (estado inicial) */
+.seal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: clamp(68px, 10vw, 92px);
+    height: clamp(68px, 10vw, 92px);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: opacity var(--fade-ms) ease;
+}
+
+.seal-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.seal-text {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 14px);
+    translate: -50% 0;
+    font: 500 clamp(12px, 2.3vw, 16px)/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+    color: #2c3423;
+    text-shadow: 0 1px 0 #fff;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+}
+
+.seal--fadeout {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== Abre o flap depois da queda ===== */
+.envelope-modal.opening .flap {
+    transform: rotateX(-180deg);
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .flap,
+    .envelope-modal,
+    .seal {
+        transition: none !important;
+        animation: none !important;
+    }
+}
