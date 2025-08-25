@@ -11,6 +11,10 @@
   --cinza: gray;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-sans);
 }
