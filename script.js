@@ -30,7 +30,7 @@
 
 // Contagem regressiva
 (function () {
-  const target = new Date("2026-04-11T17:00:00").getTime();
+  const target = new Date("2026-04-11T14:30:00").getTime();
   const dd = document.getElementById("dd");
   const hh = document.getElementById("hh");
   const mm = document.getElementById("mm");
