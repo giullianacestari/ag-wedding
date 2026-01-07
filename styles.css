@@ -1,4 +1,4 @@
-/* Fonts */
+/* Variáveis e fontes */
 :root {
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Lato', system-ui, -apple-system;
@@ -8,9 +8,12 @@
   --verde-claro: #98ab8f;
   --verde-medio: #5d6957;
   --verde-escuro: #2c3423;
+  --verde-muito-escuro: #1b2115;
   --cinza: gray;
 }
 
+
+/* Reset e base */
 * {
   scroll-behavior: smooth;
 }
@@ -27,6 +30,9 @@ body {
   font-family: var(--font-cursiva);
   font-weight: 900;
 }
+
+
+/* Animações */
 
 /* Animação de desvanecimento */
 @keyframes fade-in {
@@ -45,8 +51,136 @@ body {
   animation: fade-in 800ms ease-out both;
 }
 
+
+/* Navbar */
+
 /* Efeito de desvanecimento da navbar */
 .nav-scrolled {
   box-shadow: 0 6px 20px rgb(0 0 0 / 0.08);
   border-color: rgb(0 0 0 / 0.06) !important;
+}
+
+
+/* Carrossel de fotos (mobile – background) */
+
+#o-casal .bg-carousel,
+#o-casal .bg-slide,
+#o-casal .bg-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+#o-casal .bg-carousel {
+  z-index: 0;
+}
+
+#o-casal .bg-slide {
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+#o-casal .bg-slide.is-active {
+  opacity: 1;
+}
+
+/* Overlay para legibilidade no mobile */
+#o-casal .bg-overlay {
+  z-index: 1;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.65),
+      rgba(255, 255, 255, 0.78));
+}
+
+
+/* Carrossel de fotos (desktop) */
+
+#o-casal .casal-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#o-casal .casal-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+#o-casal .casal-slide.is-active {
+  opacity: 1;
+}
+
+/* Ajustes individuais das fotos (desktop) */
+
+#o-casal .casal-slide.s2,
+#o-casal .casal-slide.s4,
+#o-casal .casal-slide.s7 {
+  background-position: center bottom !important;
+}
+
+#o-casal .casal-slide.s8 {
+  background-position: center 50% !important;
+}
+
+
+/* Ajustes individuais das fotos (mobile) */
+
+#o-casal .bg-slide.s1,
+#o-casal .bg-slide.s4 {
+  background-position: center center !important;
+}
+
+#o-casal .bg-slide.s3 {
+  background-position: 70% center !important;
+}
+
+#o-casal .bg-slide.s5 {
+  background-position: center 80% !important;
+}
+
+#o-casal .bg-slide.s2,
+#o-casal .bg-slide.s7 {
+  background-position: center bottom !important;
+}
+
+/* Texto – seção O Casal */
+
+.texto-casal {
+  font-size: 1.125rem;
+  /* equivalente a text-lg */
+  line-height: 1.75;
+  color: var(--cor-texto-cinza);
+
+  text-align: justify;
+  text-justify: inter-word;
+
+  margin: 0;
+}
+
+
+/* Acessibilidade */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #o-casal .bg-slide,
+  #o-casal .casal-slide {
+    transition: none;
+  }
+}
+
+
+/* Texto – Lista de Presentes (desktop) */
+
+@media (min-width: 1024px) {
+  #presentes .presentes-texto {
+    text-align: justify;
+    text-justify: inter-word;
+    max-width: 520px;
+  }
 }

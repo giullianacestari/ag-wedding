@@ -19,7 +19,7 @@
 
 <body class="text-gray-800 antialiased">
 
-  <!-- ===== Modal Envelope: selo cai reto com bounce; depois o flap abre ===== -->
+  <!-- Modal com envelope -->
   <div id="envelope-modal" class="envelope-modal" role="dialog" aria-modal="true" aria-label="Convite de casamento">
     <div class="envelope-wrap">
       <div class="envelope">
@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <!-- Navbar -->
+  <!-- Menu de navegação -->
   <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="backdrop-blur-md border-b border-transparent" id="navbarInner">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -102,37 +102,40 @@
     </div>
   </header>
 
-  <!-- Versículo -->
-  <section id="versiculo" class="pt-28 pb-12 bg-[var(--bege)]">
-    <div class="container mx-auto px-6 text-center">
-      <blockquote class="max-w-3xl mx-auto">
-        <p class="text-lg md:text-xl italic text-[var(--cor-texto-cinza)] leading-relaxed font-serif">
-          "Àquele que é capaz de fazer infinitamente mais do que tudo o que pedimos ou pensamos, de acordo com o seu
-          poder que atua em nós."
-        </p>
-        <footer class="mt-4 text-sm md:text-base text-gray-600">
-          - Efésios 3:20
-        </footer>
-      </blockquote>
-    </div>
-  </section>
+  <!-- Tela inicial: versículo + brasão -->
+  <main id="home">
+    <!-- Versículo -->
+    <section id="versiculo" class="pt-28 pb-12 bg-[var(--bege)]">
+      <div class="container mx-auto px-6 text-center">
+        <blockquote class="max-w-3xl mx-auto">
+          <p class="text-lg md:text-xl italic text-[var(--cor-texto-cinza)] leading-relaxed font-serif">
+            "Àquele que é capaz de fazer infinitamente mais do que tudo o que pedimos ou pensamos, de acordo com o seu
+            poder que atua em nós."
+          </p>
+          <footer class="mt-4 text-sm md:text-base text-gray-600">
+            - Efésios 3:20
+          </footer>
+        </blockquote>
+      </div>
+    </section>
 
-  <!-- Nome dos noivos + Foto -->
-  <header
-    class="relative h-screen flex items-center justify-center text-center text-[var(--verde-escuro)] bg-[var(--bege)]">
-    <div class="absolute inset-0 bg-white opacity-40 z-10"></div>
-    <img src="./img/cerimonia-fundo.png"
-      class="absolute inset-0 w-full h-full object-cover object-[center_-20px-20px] object-top opacity-40" />
-    <div class="relative z-20 p-4 animate-fade-in">
-      <!-- <h3 class="text-xl md:text-2xl font-light tracking-widest uppercase">Vamos nos casar</h3> -->
-      <img src="./img/brasao.png" alt="Brasão dos noivos" class="block mx-auto w-40 md:w-44 lg:w-44 aspect-square" />
-      <h1 class="text-6xl md:text-6xl lg:text-6xl font-bold my-4 font-cursiva">Giulliana & Anthony</h1>
-      <p class="text-xl md:text-2xl font-light tracking-wider">11 de abril de 2026</p>
-    </div>
-  </header>
+    <!-- Foto da cerimônia + Brasão -->
+    <section id="brasao"
+      class="relative h-screen flex items-center justify-center text-center text-[var(--verde-escuro)] bg-[var(--bege)]">
+      <div class="absolute inset-0 bg-white opacity-40 z-10"></div>
+      <img src="./img/cerimonia-fundo.png"
+        class="absolute inset-0 w-full h-full object-cover object-[center_-20px-20px] object-top opacity-40" />
+      <div class="relative z-20 p-4 animate-fade-in">
+        <!-- <h3 class="text-xl md:text-2xl font-light tracking-widest uppercase">Vamos nos casar</h3> -->
+        <img src="./img/brasao.png" alt="Brasão dos noivos" class="block mx-auto w-40 md:w-44 lg:w-44 aspect-square" />
+        <h1 class="text-6xl md:text-6xl lg:text-6xl font-bold my-4 font-cursiva">Giulliana & Anthony</h1>
+        <p class="text-xl md:text-2xl font-light tracking-wider">11 de abril de 2026</p>
+      </div>
+    </section>
+  </main>
 
-  <!-- Seções: Contagem / Casal / Evento / Presentes / Presença -->
-  <main>
+  <!-- Seções: Contagem regressiva / Casal / Evento / Presentes / Presença -->
+  <main id="secoes">
     <!-- Contagem regressiva -->
     <section id="countdown" class="py-20 bg-[var(--verde-claro)] text-[var(--branco)]">
       <div class="container mx-auto px-6 text-center">
@@ -172,34 +175,85 @@
       </div>
     </section>
 
-
-
-
-
-
     <!-- O Casal -->
-    <section id="o-casal" class="py-20 bg-white">
-      <div class="container mx-auto px-6 text-center max-w-3xl">
-        <div class="flex justify-center mb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--verde-medio)]" viewBox="0 0 20 20"
-            fill="currentColor">
-            <path fill-rule="evenodd"
-              d="M3.172 5.172a4 4 0 016.657 0L10 5.343l.171-.171a4 4 0 116.657 5.657L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-              clip-rule="evenodd" />
-          </svg>
+    <section id="o-casal" class="relative py-20 overflow-hidden bg-white">
+      <!-- Background carousel (SÓ MOBILE) -->
+      <div class="bg-carousel md:hidden" aria-hidden="true">
+        <div class="bg-slide is-active s1" style="background-image: url('./img/foto1.jpg');"></div>
+        <div class="bg-slide s2" style="background-image: url('./img/foto2.jpg');"></div>
+        <div class="bg-slide s3" style="background-image: url('./img/foto3.jpg');"></div>
+        <div class="bg-slide s4" style="background-image: url('./img/foto4.jpg');"></div>
+        <div class="bg-slide s5" style="background-image: url('./img/foto5.jpg');"></div>
+        <div class="bg-slide s6" style="background-image: url('./img/foto6.jpg');"></div>
+        <div class="bg-slide s7" style="background-image: url('./img/foto7.jpg');"></div>
+        <div class="bg-slide s8" style="background-image: url('./img/foto8.jpg');"></div>
+      </div>
+
+      <!-- Overlay mobile -->
+      <div class="bg-overlay md:hidden" aria-hidden="true"></div>
+
+      <!-- Conteúdo -->
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
+          <!-- Coluna esquerda: tudo no MESMO card -->
+          <div class="text-left">
+            <div class="backdrop-blur-sm p-6">
+              <!-- Título com coração (mobile centralizado / desktop em linha) -->
+              <div class="flex flex-col items-center text-center
+         md:flex-row md:items-center md:justify-start md:text-left
+         gap-3 mb-6">
+
+                <!-- Coração -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 md:h-8 md:w-8 text-[var(--verde-medio)] shrink-0"
+                  viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 016.657 0L10 5.343l.171-.171a4 4 0 116.657 5.657L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd" />
+                </svg>
+
+                <!-- Título -->
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif leading-none">
+                  O Casal
+                </h2>
+              </div>
+
+              <!-- Texto -->
+              <p class="texto-casal">
+                Nossa história começou em 2018 na escola de música, onde a melodia da amizade logo se transformou em uma
+                canção de amor. De amigos, nos tornamos namorados, parceiros de escola, trabalho e também da vida,
+                compartilhando sonhos e desafios.
+                <br><br>
+
+                Nosso relacionamento ganhou ainda mais sentido quando decidimos seguir juntos no mesmo propósito: levar
+                o amor
+                de Cristo a todas as pessoas.
+                <br><br>
+
+                Com muito amor, cumplicidade e gratidão, nos preparamos para nos tornarmos uma só carne sob a lei dos
+                homens e,
+                principalmente, sob a lei de Deus.
+              </p>
+            </div>
+          </div>
+
+          <!-- Coluna direita: carrossel em card (SÓ DESKTOP) -->
+          <div class="hidden md:block">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden relative h-[420px]">
+              <div class="casal-carousel h-full">
+                <div class="casal-slide is-active s1" style="background-image: url('./img/foto1.jpg');"></div>
+                <div class="casal-slide s2" style="background-image: url('./img/foto2.jpg');"></div>
+                <div class="casal-slide s3" style="background-image: url('./img/foto3.jpg');"></div>
+                <div class="casal-slide s4" style="background-image: url('./img/foto4.jpg');">
+                </div>
+                <div class="casal-slide s5" style="background-image: url('./img/foto5.jpg');"></div>
+                <div class="casal-slide s6" style="background-image: url('./img/foto6.jpg');"></div>
+                <div class="casal-slide s7" style="background-image: url('./img/foto7.jpg');"></div>
+                <div class="casal-slide s8" style="background-image: url('./img/foto8.jpg');"></div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-serif">O Casal</h2>
-        <p class="text-lg text-[var(--cor-texto-cinza)] leading-relaxed">
-          Nossa história começou em 2018 na escola de música, onde a melodia da amizade logo se transformou em uma
-          canção de amor. De amigos, passamos a namorados, parceiros de escola, trabalho e também da vida,
-          compartilhando sonhos e desafios. <br><br>
-
-          Nosso relacionamento ganhou ainda mais sentido quando decidimos seguir juntos no mesmo propósito: levar o amor
-          de Cristo a todas as pessoas. <br><br>
-
-          Com muito amor, cumplicidade e gratidão, nos preparamos para nos tornarmos uma só carne sob a lei dos homens
-          e, principalmente, sob a lei de Deus.
-        </p>
       </div>
     </section>
 
@@ -238,20 +292,41 @@
     <!-- Lista de Presentes -->
     <section id="presentes" class="py-20 bg-white">
       <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
-          <div class="md:w-1/3 w-full flex-shrink-0 hidden md:block">
-            <img src="./img/casa-nova.jpeg"
-              class="rounded-lg shadow-xl w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300 " />
-          </div>
-          <div class="md:w-2/3 w-full text-center md:text-left">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif mb-4">Lista de Presentes</h2>
-            <p class="text-lg text-[var(--cor-texto-cinza)] leading-relaxed mb-6">
-              Se você quiser nos presentear, ficaremos muito felizes! Sua presença já é o nosso maior presente, mas
-              criamos uma lista com carinho para quem quiser contribuir com esse momento.
-            </p>
-            <a href="https://noivos.casar.com/giulliana-e-anthony#presentes" target="_blank"
-              class="bg-[var(--verde-medio)] text-white font-bold py-3 px-8 rounded-lg inline-block hover:opacity-90 transition duration-300 shadow-lg transform hover:-translate-y-0.5 hover:text-[var(--verde-escuro)] hover:bg-[var(--verde-claro)]">Ver
-              Lista de Presentes</a>
+        <div class="max-w-6xl mx-auto">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+            <!-- Imagem (esquerda no desktop/tablet) e escondida no mobile -->
+            <div class="w-full hidden md:block">
+              <img src="./img/casa-nova.jpeg" class="rounded-lg shadow-xl w-full h-[280px] md:h-[360px] object-cover" />
+            </div>
+
+
+            <!-- Texto (direita no desktop/tablet) -->
+            <div class="w-full">
+              <!-- Card (igual ao estilo do “O Casal”) -->
+              <div class="p-6">
+
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 font-serif mb-4 text-center md:text-right">
+                  Lista de Presentes
+                </h2>
+
+                <p
+                  class="presentes-texto text-lg text-[var(--cor-texto-cinza)] leading-relaxed mb-6 text-center md:text-right">
+                  Se você quiser nos presentear, ficaremos muito felizes! Sua presença já é o nosso maior presente, mas
+                  criamos uma lista com carinho para quem quiser contribuir com esse momento.
+                </p>
+
+                <div class="flex justify-center md:justify-end">
+                  <a href="https://noivos.casar.com/giulliana-e-anthony#presentes" target="_blank" class="bg-[var(--verde-medio)] text-white font-bold py-3 px-8 rounded-lg
+           inline-flex w-fit
+           hover:opacity-90 transition duration-300 shadow-lg transform
+           hover:-translate-y-0.5 hover:text-[var(--verde-escuro)] hover:bg-[var(--verde-claro)]">
+                    Ver Lista de Presentes
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -261,12 +336,13 @@
     <section id="rsvp" class="py-20 bg-[var(--verde-claro)]">
       <div class="container mx-auto px-6 text-center max-w-3xl">
         <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-serif">Confirme sua Presença</h2>
-        <p class="text-lg text-[var(--verde-escuro)] leading-relaxed mb-6">
+        <p class="text-lg text-[var(--verde-muito-escuro)] leading-relaxed mb-6">
           Sua presença é muito importante para nós! A confirmação nos ajuda na organização dos lugares e no atendimento
           personalizado, com muito carinho, para
-          cada convidado. Por favor, confirme até o dia 11 de março de 2026.
+          cada convidado. <br>Por favor, confirme até o dia <strong>11 de março de 2026</strong>.
         </p>
-        <p class="text-md text-[var(--verde-escuro)] bg-white/50 p-4 rounded-lg shadow-sm leading-relaxed mb-8">
+        <p
+          class="text-md text-[var(--verde-muito-escuro)] font-semibold bg-white/50 p-4 rounded-lg shadow-sm leading-relaxed mb-8">
           Para sua comodidade, nossa equipe de assessoria entrará em contato com todos os convidados durante o mês do
           casamento para uma confirmação final.
         </p>
@@ -277,7 +353,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Rodapé -->
   <footer class="py-16 bg-[var(--verde-escuro)] text-white">
     <div class="container mx-auto px-6 text-center">
       <p class="text-2xl font-serif mb-2">Com todo nosso amor,</p>
